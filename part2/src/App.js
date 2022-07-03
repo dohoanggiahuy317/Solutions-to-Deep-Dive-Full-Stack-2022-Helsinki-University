@@ -46,6 +46,7 @@ const App = () => {
         }
     ]
 
+    
     return (
         courses.map((course) => {
             return (
