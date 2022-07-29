@@ -32,7 +32,7 @@ const InputForm = (props) => {
     return (
         <div>
             <form>
-                <input onChange={handleInputChange} value={newInput}></input>
+                find contries <input onChange={handleInputChange} value={newInput}></input>
             </form>
         </div>
     )

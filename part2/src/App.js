@@ -18,7 +18,7 @@ const App = () => {
             })
     }, [])
 
-    const callback=(child) => {
+    const callback = (child) => {
         setFilterNote(child);
     }
 
