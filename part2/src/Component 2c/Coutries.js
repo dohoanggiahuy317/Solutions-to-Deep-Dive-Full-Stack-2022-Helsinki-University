@@ -12,8 +12,6 @@ const Countries = (props) => {
         }
         newIsShow[name] = !isShown[name]
         setIsShown(newIsShow);
-
-        
         // console.log(name)
         // console.log(newIsShow)
     }
@@ -39,7 +37,7 @@ const Countries = (props) => {
                     <div key={country.idd.suffixes}>
                         
                         <span>{country.name.official} </span>
-                        <button key={country} onClick={showDetails.bind(this, country.name.official)}>show</button>                       
+                        <button key={country} onClick={() => showDetails(country.name.official)}>show</button>                       
                         {isShown[country.name.official] && <CountryInfo country={country} />}
                     </div>
                 )}

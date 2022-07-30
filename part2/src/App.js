@@ -1,37 +1,86 @@
-// ----------------------------- PART 2c Database------------------------------------
-import { useEffect, useState } from "react";
-import axios from 'axios';
-import InputForm from "./Component 2c/InputForm";
-import Countries from "./Component 2c/Coutries";
+//----------------------------- PART 2d The phonebook------------------------------------
+import { useEffect, useState } from 'react'
+import Filter from './Component 2d/Filter'
+import PersonForm from './Component 2d/PersonForm'
+import Person from './Component 2d/Person'
+import noteService from './Component 2d/services/noteService'
 
 const App = () => {
-    const [notes, setNotes] = useState([]);
-    const [filterNote, setFilterNote] = useState([])
-    
+    //State for all contact and filtered contact
+    const [persons, setPersons] = useState([])
+    const [filtered, setFiltered] = useState([])
+
+    //Retrieved the data from data base
     useEffect(() => {
-        console.log("effect");
-        axios
-            .get('http://localhost:3001/countries')
+        noteService
+            .getAll()
             .then(response => {
-                console.log('promise fulfilled')
-                setNotes(response.data)
+                setPersons(response);
+                setFiltered(response)
             })
     }, [])
 
-    const callback = (child) => {
-        setFilterNote(child);
+    //Update all contact list
+    const updatePersons = (newPersonsList) => {
+        setFiltered(newPersonsList)
+        setPersons(newPersonsList)
     }
 
+    //Update for the filter list
+    const updateFilter = (filterList) => {
+        setFiltered(filterList)
+    }
 
     return (
         <div>
-            <InputForm notes={notes} callback={callback}/>
-            <Countries filterNote={filterNote} />
+            <h2>Phonebook</h2>
+            <Filter persons={persons} setFiltered={updateFilter}/>
+
+            <h3>add a new contact</h3>
+            <PersonForm persons={persons} updatePersons={updatePersons}/>
+
+            <h3>Numbers</h3>
+            <Person persons={filtered} updatePersons={updatePersons}/>
         </div>
     )
 }
 
 export default App
+
+// ----------------------------- PART 2c Database------------------------------------
+// import { useEffect, useState } from "react";
+// import axios from 'axios';
+// import InputForm from "./Component 2c/InputForm";
+// import Countries from "./Component 2c/Coutries";
+
+// const App = () => {
+//     const [notes, setNotes] = useState([]);
+//     const [filterNote, setFilterNote] = useState([])
+    
+//     useEffect(() => {
+//         console.log("effect");
+//         axios
+//             .get('http://localhost:3001/countries')
+//             .then(response => {
+//                 console.log('promise fulfilled')
+//                 setNotes(response.data)
+//             })
+//     }, [])
+
+//     const callback = (child) => {
+//         setFilterNote(child);
+//     }
+
+
+//     return (
+//         <div>
+//             <InputForm notes={notes} callback={callback}/>
+//             <Countries filterNote={filterNote} />
+//         </div>
+//     )
+// }
+
+// export default App
 
 
 // ----------------------------- PART 2b The phonebook------------------------------------
