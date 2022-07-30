@@ -1,14 +1,16 @@
-//----------------------------- PART 2d The phonebook------------------------------------
+//----------------------------- PART 2e The phonebook------------------------------------
 import { useEffect, useState } from 'react'
-import Filter from './Component 2d/Filter'
-import PersonForm from './Component 2d/PersonForm'
-import Person from './Component 2d/Person'
-import noteService from './Component 2d/services/noteService'
+import Filter from './Component 2e/Filter'
+import PersonForm from './Component 2e/PersonForm'
+import Person from './Component 2e/Person'
+import Notification from './Component 2e/Notification'
+import noteService from './Component 2e/services/noteService'
 
 const App = () => {
     //State for all contact and filtered contact
     const [persons, setPersons] = useState([])
     const [filtered, setFiltered] = useState([])
+    const [message, setMessage] = useState("")
 
     //Retrieved the data from data base
     useEffect(() => {
@@ -21,9 +23,14 @@ const App = () => {
     }, [])
 
     //Update all contact list
-    const updatePersons = (newPersonsList) => {
+    const updatePersons = (newPersonsList, updateMessage) => {
         setFiltered(newPersonsList)
         setPersons(newPersonsList)
+        setMessage(updateMessage)
+        
+        setTimeout(() => {
+            setMessage(null)
+        }, 2000)
     }
 
     //Update for the filter list
@@ -40,12 +47,62 @@ const App = () => {
             <PersonForm persons={persons} updatePersons={updatePersons}/>
 
             <h3>Numbers</h3>
+            <Notification message={message} />
             <Person persons={filtered} updatePersons={updatePersons}/>
         </div>
     )
 }
 
 export default App
+
+//----------------------------- PART 2d The phonebook------------------------------------
+// import { useEffect, useState } from 'react'
+// import Filter from './Component 2d/Filter'
+// import PersonForm from './Component 2d/PersonForm'
+// import Person from './Component 2d/Person'
+// import noteService from './Component 2d/services/noteService'
+
+// const App = () => {
+//     //State for all contact and filtered contact
+//     const [persons, setPersons] = useState([])
+//     const [filtered, setFiltered] = useState([])
+
+//     //Retrieved the data from data base
+//     useEffect(() => {
+//         noteService
+//             .getAll()
+//             .then(response => {
+//                 setPersons(response);
+//                 setFiltered(response)
+//             })
+//     }, [])
+
+//     //Update all contact list
+//     const updatePersons = (newPersonsList) => {
+//         setFiltered(newPersonsList)
+//         setPersons(newPersonsList)
+//     }
+
+//     //Update for the filter list
+//     const updateFilter = (filterList) => {
+//         setFiltered(filterList)
+//     }
+
+//     return (
+//         <div>
+//             <h2>Phonebook</h2>
+//             <Filter persons={persons} setFiltered={updateFilter}/>
+
+//             <h3>add a new contact</h3>
+//             <PersonForm persons={persons} updatePersons={updatePersons}/>
+
+//             <h3>Numbers</h3>
+//             <Person persons={filtered} updatePersons={updatePersons}/>
+//         </div>
+//     )
+// }
+
+// export default App
 
 // ----------------------------- PART 2c Database------------------------------------
 // import { useEffect, useState } from "react";
