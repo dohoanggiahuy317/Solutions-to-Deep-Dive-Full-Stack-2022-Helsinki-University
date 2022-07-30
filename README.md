@@ -1,4 +1,4 @@
-# Solutions to problems in the course <br> Modern Web Dev Full Stack open 2022
+# Solutions to problems in the course <br> Deep Dive Into Modern Web Development Full Stack open 2022
 This course's content and material is similar to the Full stack course at the Department of Computer Science Departmen at the University of Helsinki, which is taught in Spring 2020. <br>
 [Link to course](https://fullstackopen.com/en/about)
 
